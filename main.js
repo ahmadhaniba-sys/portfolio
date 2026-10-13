@@ -145,11 +145,11 @@ const SYSTEMS = [
 ];
 
 const SERVERS = [
-  { id: "1546036540474400810", name: "", invite: "" },
-  { id: "1530900427023978568", name: "", invite: "" },
-  { id: "1246209695329419374", name: "", invite: "" },
-  { id: "1538983611032670310", name: "", invite: "" },
-  { id: "1559379173511004282", name: "", invite: "" },
+  { name: "Kaimen", status: "In development", invite: "https://discord.gg/MXPGub9XjB", icon: "servers/kaimen.png", members: 45, online: 12 },
+  { name: "Ultimate Draft Simulator", status: "In development", invite: "https://discord.gg/R94EEfrchW", icon: "servers/uds.png", members: 384, online: 50 },
+  { name: "RE:Trigger", status: "In development", invite: "https://discord.gg/N7CfzuhWwB", icon: "servers/retrigger.png", members: 52, online: 23 },
+  { name: "Soul Bound", status: "Game", invite: "https://discord.gg/9Ucx7eyxra", icon: "", members: 32, online: 9 },
+  { name: "Starfall Productions", status: "Studio", invite: "https://discord.gg/H95crTAbV4", icon: "servers/starfall.png", members: 371, online: 44 },
 ];
 
 const $ = (selector, root = document) => root.querySelector(selector);
@@ -329,26 +329,36 @@ function setupBrowser() {
 
 function setupServers() {
   const list = $("#servers");
-  const month = new Intl.DateTimeFormat("en", { month: "short", year: "numeric" });
+  const number = new Intl.NumberFormat("en");
   for (const server of SERVERS) {
-    const created = new Date(Number((BigInt(server.id) >> 22n) + 1420070400000n));
-    const card = document.createElement(server.invite ? "a" : "div");
-    card.className = "server";
-    if (server.invite) {
-      card.href = server.invite;
-      card.target = "_blank";
-      card.rel = "noopener";
-    }
-    card.innerHTML = `
-      <span class="server-mark">${sigil(server.id)}</span>
-      <span class="server-name">${server.name || "Discord server"}</span>
-      <span class="server-id">${server.id}</span>
-      <span class="server-foot"><span>Since ${month.format(created)}</span><span>${server.invite ? "Join" : "Contributor"}</span></span>`;
+    const initials = server.name.split(/\s+/).map((word) => word[0]).join("").slice(0, 2);
+    const icon = server.icon
+      ? `<img class="server-icon" src="${server.icon}" alt="" width="56" height="56" loading="lazy">`
+      : `<span class="server-icon server-initials">${initials}</span>`;
     const item = document.createElement("li");
-    item.append(card);
+    item.innerHTML = `
+      <a class="server" href="${server.invite}" target="_blank" rel="noopener" aria-label="Join the ${server.name} Discord">
+        <span class="server-top">${icon}<span class="server-go" aria-hidden="true">&#8599;</span></span>
+        <span class="server-name">${server.name}</span>
+        <span class="server-status">${server.status}</span>
+        <span class="server-stats">
+          <span><b data-members>${number.format(server.members)}</b> members</span>
+          <span><i class="server-dot"></i><b data-online>${number.format(server.online)}</b> online</span>
+        </span>
+        <span class="server-join">Join Discord</span>
+      </a>`;
     list.append(item);
+
+    const code = server.invite.split("/").pop();
+    fetch(`https://discord.com/api/v10/invites/${code}?with_counts=true`)
+      .then((response) => (response.ok ? response.json() : null))
+      .then((data) => {
+        if (!data || !data.approximate_member_count) return;
+        $("[data-members]", item).textContent = number.format(data.approximate_member_count);
+        $("[data-online]", item).textContent = number.format(data.approximate_presence_count);
+      })
+      .catch(() => {});
   }
-  $("#count-servers").textContent = SERVERS.length;
 }
 
 function setupContact() {

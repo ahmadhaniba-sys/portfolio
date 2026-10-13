@@ -420,62 +420,72 @@ h2 {
 
 .servers {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
-  border-top: 1px solid var(--line);
-  border-left: 1px solid var(--line);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+  gap: 12px;
 }
 
-.servers li { display: flex; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.servers li { display: flex; }
 
 .server {
-  position: relative;
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 6px;
   min-width: 0;
-  padding: clamp(22px, 2.4vw, 32px);
+  padding: 22px;
+  border: 1px solid var(--line);
   background: var(--panel);
   text-decoration: none;
-  overflow: hidden;
-  transition: background 0.3s ease;
+  transition: border-color 0.25s ease, background 0.25s ease;
 }
 
-.server::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(-30deg, transparent 0 14px, rgba(255, 255, 255, 0.025) 14px 15px);
-  pointer-events: none;
+.server:hover { border-color: var(--white); background: #101010; }
+
+.server-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 26px;
 }
 
-.server:hover { background: #111111; }
+.server-icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  object-fit: cover;
+  background: var(--line);
+  transition: border-radius 0.25s ease;
+}
 
-.server-mark { width: 40px; height: 40px; margin-bottom: 22px; color: var(--white); }
-.server-mark svg { display: block; width: 100%; height: 100%; }
+.server:hover .server-icon { border-radius: 12px; }
+
+.server-initials {
+  font-family: var(--display);
+  font-size: 18px;
+  color: var(--white);
+}
+
+.server-go {
+  font-size: 18px;
+  line-height: 1;
+  color: var(--ash);
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.server:hover .server-go { color: var(--white); transform: translate(2px, -2px); }
 
 .server-name {
   font-family: var(--display);
-  font-weight: 300;
-  font-size: 18px;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 1.25;
   letter-spacing: -0.01em;
   color: var(--white);
 }
 
-.server-id {
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--ash);
-  overflow-wrap: anywhere;
-}
-
-.server-foot {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: 26px;
-  padding-top: 14px;
-  border-top: 1px solid var(--line);
+.server-status {
+  margin-top: 8px;
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.12em;
@@ -483,7 +493,45 @@ h2 {
   color: var(--ash);
 }
 
-a.server .server-foot span:last-child { color: var(--white); }
+.server-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin-top: auto;
+  padding-top: 26px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ash);
+}
+
+.server-stats b { font-weight: 500; color: var(--white); }
+
+.server-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 7px;
+  border-radius: 50%;
+  background: var(--white);
+  vertical-align: 1px;
+}
+
+.server-join {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  margin-top: 18px;
+  border: 1px solid var(--line-strong);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bone);
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.server:hover .server-join { background: var(--white); border-color: var(--white); color: var(--void); }
 
 /* About and contact */
 
