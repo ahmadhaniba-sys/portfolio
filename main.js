@@ -10,11 +10,11 @@ const CATEGORIES = ["Combat", "Sports", "Netcode", "AI", "Physics", "Gameplay", 
 // clip: the file name in the clips folder, without .mp4.
 const SYSTEMS = [
   {
-    id: "katana",
-    clip: "katana-combat",
-    title: "Katana Combat",
+    id: "parry",
+    clip: "soulbound-combat",
+    title: "Parry Based Combat",
     cat: "Combat",
-    tags: ["M1 combos", "Hit reactions", "Blood decals"],
+    tags: ["Parry windows", "Sword M1 combos", "Clashes"],
   },
   {
     id: "abilities",
@@ -115,6 +115,13 @@ const SYSTEMS = [
     tags: ["Part-based builder", "Server-checked purchases", "Saved loadouts"],
   },
   {
+    id: "clanreroll",
+    clip: "soulbound-clan-reroll",
+    title: "Clan Reroll",
+    cat: "Gameplay",
+    tags: ["Inventory", "Consumables", "Clan rolls"],
+  },
+  {
     id: "skilltree",
     clip: "nCjqwaNsHhoFaa_sD",
     title: "Skill Tree System",
@@ -128,6 +135,21 @@ const SYSTEMS = [
     cat: "Interface",
     tags: ["Generated starfield", "ReplicatedFirst", "Loading flow"],
   },
+  {
+    id: "menus",
+    clip: "soulbound-menus",
+    title: "Soul Bound Menus",
+    cat: "Interface",
+    tags: ["Pause menu", "Animated title", "Save slots"],
+  },
+];
+
+const SERVERS = [
+  { id: "1546036540474400810", name: "", invite: "" },
+  { id: "1530900427023978568", name: "", invite: "" },
+  { id: "1246209695329419374", name: "", invite: "" },
+  { id: "1538983611032670310", name: "", invite: "" },
+  { id: "1559379173511004282", name: "", invite: "" },
 ];
 
 const $ = (selector, root = document) => root.querySelector(selector);
@@ -303,6 +325,30 @@ function setupBrowser() {
     },
     { threshold: 0.35 },
   ).observe(frame);
+}
+
+function setupServers() {
+  const list = $("#servers");
+  const month = new Intl.DateTimeFormat("en", { month: "short", year: "numeric" });
+  for (const server of SERVERS) {
+    const created = new Date(Number((BigInt(server.id) >> 22n) + 1420070400000n));
+    const card = document.createElement(server.invite ? "a" : "div");
+    card.className = "server";
+    if (server.invite) {
+      card.href = server.invite;
+      card.target = "_blank";
+      card.rel = "noopener";
+    }
+    card.innerHTML = `
+      <span class="server-mark">${sigil(server.id)}</span>
+      <span class="server-name">${server.name || "Discord server"}</span>
+      <span class="server-id">${server.id}</span>
+      <span class="server-foot"><span>Since ${month.format(created)}</span><span>${server.invite ? "Join" : "Contributor"}</span></span>`;
+    const item = document.createElement("li");
+    item.append(card);
+    list.append(item);
+  }
+  $("#count-servers").textContent = SERVERS.length;
 }
 
 function setupContact() {
@@ -520,5 +566,6 @@ function setupField() {
 
 setupContact();
 setupBrowser();
+setupServers();
 setupChrome();
 setupField();
