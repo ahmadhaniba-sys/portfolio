@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>hz_ji · Roblox systems scripter</title>
+<meta name="description" content="Roblox scripter. Combat, netcode, AI, physics and full sports games, each shown running on video.">
+<meta name="theme-color" content="#000000">
+<meta name="color-scheme" content="dark">
+<link rel="icon" id="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&family=Unbounded:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="skip" href="#systems">Skip to the systems</a>
+
+<header class="nav" id="nav">
+  <a class="brand" href="#top" aria-label="hz_ji, back to top">
+    <span class="brand-mark" data-sigil="hz_ji"></span>
+    <span class="brand-name" data-config="handle">hz_ji</span>
+  </a>
+  <nav class="nav-links" aria-label="Sections">
+    <a href="#systems">Systems</a>
+    <a href="#about">About</a>
+  </nav>
+  <a class="btn btn-solid btn-small" href="#contact" data-discord>Get in touch</a>
+</header>
+
+<main>
+
+<section class="hero" id="top">
+  <canvas class="field" id="field" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <h1 class="eyebrow">Roblox scripter</h1>
+    <div class="hero-actions">
+      <a class="btn btn-solid" href="#systems">Watch the systems</a>
+      <a class="btn btn-line" href="#contact" data-discord>Get in touch</a>
+    </div>
+  </div>
+  <dl class="hero-facts">
+    <div><dt>On film</dt><dd><span id="count-filmed">17</span> systems</dd></div>
+    <div><dt>Built so far</dt><dd>45 systems</dd></div>
+  </dl>
+</section>
+
+<section class="section" id="systems">
+  <header class="section-head reveal">
+    <p class="eyebrow">Systems</p>
+    <h2>Pick one and watch it run.</h2>
+    <p class="section-sub">Every clip is recorded in a live place.</p>
+  </header>
+
+  <div class="browser reveal">
+    <nav class="index" id="index" aria-label="All systems"></nav>
+
+    <article class="stage" id="stage">
+      <div class="frame" id="frame">
+        <div class="frame-state" id="frame-state"><span class="frame-sigil" id="frame-sigil"></span><span class="frame-note" id="frame-note"></span></div>
+      </div>
+      <div class="meta" id="meta" aria-live="polite">
+        <p class="meta-cat" id="meta-cat"></p>
+        <h3 id="meta-title"></h3>
+        <ul class="tags" id="meta-tags"></ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="section about" id="about">
+  <div class="about-text reveal">
+    <p class="eyebrow">About</p>
+    <h2>The hard part is the part I like.</h2>
+    <p>I script the systems that have to hold up with real players on them: netcode that stays fair at 200 ping, AI that plans instead of pacing, physics that can't be flung, and data that can't be duplicated.</p>
+    <p>Everything is written to be read. Short modules, typed interfaces, every tunable number in one config file, and comments that say why. The source is yours when the job is done.</p>
+  </div>
+
+  <div class="contact reveal" id="contact">
+    <p class="eyebrow">Contact</p>
+    <h2>Tell me what you're building.</h2>
+    <p>Message me on Discord with the system you need and the game it's for.</p>
+    <div class="contact-actions" id="contact-actions"></div>
+    <p class="contact-note" id="copy-note" role="status"></p>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <span data-config="handle">hz_ji</span>
+  <a href="#top">Back to top</a>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

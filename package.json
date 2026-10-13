@@ -1,0 +1,11 @@
+{
+  "name": "hz-ji-showcase",
+  "private": true,
+  "scripts": {
+    "build": "node build.mjs",
+    "deploy": "node build.mjs && wrangler pages deploy --branch main"
+  },
+  "devDependencies": {
+    "wrangler": "^4.149.0"
+  }
+}
