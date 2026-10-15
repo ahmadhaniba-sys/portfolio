@@ -38,6 +38,13 @@ const SYSTEMS = [
     tags: ["Arc preview", "Shared projectile code", "Leaderboard"],
   },
   {
+    id: "iceshikai",
+    clip: "soulbound-ice-shikai",
+    title: "Ice Shikai Freeze",
+    cat: "Combat",
+    tags: ["Freeze build-up", "Full freeze", "Shatter bonus"],
+  },
+  {
     id: "hockey",
     clip: "nCBm7CX9fh_XI0JLJ",
     title: "Ice Hockey System",
