@@ -151,6 +151,25 @@ const SYSTEMS = [
   },
 ];
 
+const GAMES = [
+  {
+    name: "Catch a Fish",
+    kind: "Fishing sim",
+    url: "https://www.roblox.com/games/71374545390242/Catch-a-fish",
+    image: "games/catch-a-fish.webp",
+    icon: "games/catch-a-fish-icon.webp",
+    tags: ["9 seas", "Offline tank income", "Mutations", "Live events"],
+  },
+  {
+    name: "Shatter & Settle",
+    kind: "Incremental",
+    url: "https://www.roblox.com/games/87857936165483/Shatter-Settle",
+    image: "games/shatter-settle.webp",
+    icon: "games/shatter-settle-icon.webp",
+    tags: ["16 bills", "Skill tree", "5 hammers", "Bankruptcy prestige"],
+  },
+];
+
 const SERVERS = [
   { name: "Kaimen", status: "In development", invite: "https://discord.gg/MXPGub9XjB", icon: "servers/kaimen.png", members: 45, online: 12 },
   { name: "Ultimate Draft Simulator", status: "In development", invite: "https://discord.gg/R94EEfrchW", icon: "servers/uds.png", members: 384, online: 50 },
@@ -332,6 +351,30 @@ function setupBrowser() {
     },
     { threshold: 0.35 },
   ).observe(frame);
+}
+
+function setupGames() {
+  const list = $("#games-list");
+  for (const game of GAMES) {
+    const item = document.createElement("li");
+    item.innerHTML = `
+      <a class="game" href="${game.url}" target="_blank" rel="noopener" aria-label="Play ${game.name} on Roblox">
+        <span class="game-shot"><img src="${game.image}" alt="" width="768" height="432" loading="lazy"></span>
+        <span class="game-body">
+          <span class="game-top">
+            <img class="game-icon" src="${game.icon}" alt="" width="52" height="52" loading="lazy">
+            <span class="game-title">
+              <span class="game-name">${game.name}</span>
+              <span class="game-kind">${game.kind}</span>
+            </span>
+            <span class="server-go" aria-hidden="true">&#8599;</span>
+          </span>
+          <span class="game-tags">${game.tags.map((tag) => `<span>${tag}</span>`).join("")}</span>
+          <span class="server-join">Play on Roblox</span>
+        </span>
+      </a>`;
+    list.append(item);
+  }
 }
 
 function setupServers() {
@@ -583,6 +626,7 @@ function setupField() {
 
 setupContact();
 setupBrowser();
+setupGames();
 setupServers();
 setupChrome();
 setupField();

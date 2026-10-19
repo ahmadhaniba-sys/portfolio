@@ -17,8 +17,10 @@ mkdirSync(`${OUT}/clips`, { recursive: true });
 
 for (const file of FILES) place(file, `${OUT}/${file}`);
 
-mkdirSync(`${OUT}/servers`, { recursive: true });
-for (const name of readdirSync("servers")) place(`servers/${name}`, `${OUT}/servers/${name}`);
+for (const folder of ["servers", "games"]) {
+  mkdirSync(`${OUT}/${folder}`, { recursive: true });
+  for (const name of readdirSync(folder)) place(`${folder}/${name}`, `${OUT}/${folder}/${name}`);
+}
 
 const sizes = {};
 const tooBig = [];
