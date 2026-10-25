@@ -388,7 +388,6 @@ function setupBrowser() {
   select(linked ? linked[1] : SYSTEMS[0].id, false);
   if (linked) $("#systems").scrollIntoView();
 
-  $("#count-filmed").textContent = SYSTEMS.length;
 
   new IntersectionObserver(
     ([entry]) => {
