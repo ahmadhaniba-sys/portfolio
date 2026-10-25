@@ -5,7 +5,7 @@ const CONFIG = {
   discordId: "1273766618941358112",
 };
 
-const CATEGORIES = ["Combat", "Sports", "Netcode", "AI", "Physics", "Gameplay", "Interface", "Rogue"];
+const CATEGORIES = ["Rogue", "Combat", "Sports", "Netcode", "AI", "Physics", "Gameplay", "Interface"];
 
 // clip: the file name in the clips folder, without .mp4.
 const SYSTEMS = [
@@ -166,6 +166,8 @@ const SYSTEMS = [
   },
 ];
 
+const FIRST = CATEGORIES.map((cat) => SYSTEMS.find((s) => s.cat === cat)).find(Boolean) || SYSTEMS[0];
+
 const GAMES = [
   {
     name: "Catch a Fish",
@@ -317,7 +319,7 @@ function setupBrowser() {
   }
 
   function select(id, fromUser) {
-    const system = SYSTEMS.find((s) => s.id === id) || SYSTEMS[0];
+    const system = SYSTEMS.find((s) => s.id === id) || FIRST;
     if (current === system.id) return;
     current = system.id;
 
@@ -359,7 +361,7 @@ function setupBrowser() {
   $("#stage").addEventListener("dragstart", (event) => event.preventDefault());
 
   const linked = location.hash.match(/^#system-(.+)$/);
-  select(linked ? linked[1] : SYSTEMS[0].id, false);
+  select(linked ? linked[1] : FIRST.id, false);
   if (linked) $("#systems").scrollIntoView();
 
 
