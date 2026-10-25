@@ -14,140 +14,120 @@ const SYSTEMS = [
     clip: "soulbound-combat",
     title: "Parry Based Combat",
     cat: "Combat",
-    tags: ["Parry windows", "Sword M1 combos", "Clashes"],
   },
   {
     id: "abilities",
     clip: "nCBuQ5cKcwStq4IbW",
     title: "Custom Ability System",
     cat: "Combat",
-    tags: ["Data-driven interpreter", "Point budget", "Server-validated builds"],
   },
   {
     id: "guns",
     clip: "nCBrLkLksm2lsSnRi",
     title: "Gun System",
     cat: "Combat",
-    tags: ["Server-flown ballistics", "Penetration model", "Procedural viewmodel", "Lag-compensated hitboxes"],
   },
   {
     id: "throwing",
     clip: "nCBaVTjbr_JHBi0Kf",
     title: "Throwing",
     cat: "Combat",
-    tags: ["Arc preview", "Shared projectile code", "Leaderboard"],
   },
   {
     id: "iceshikai",
     clip: "soulbound-ice-shikai",
     title: "Ice Shikai Freeze",
     cat: "Combat",
-    tags: ["Freeze build-up", "Full freeze", "Shatter bonus"],
   },
   {
     id: "hockey",
     clip: "nCBm7CX9fh_XI0JLJ",
     title: "Ice Hockey System",
     cat: "Sports",
-    tags: ["Skating physics", "Match rules", "Goalie AI", "Single spec module"],
   },
   {
     id: "lagcomp",
     clip: "nCBC2iD4sT_IbfaE8",
     title: "Lag Optimization",
     cat: "Netcode",
-    tags: ["Hitbox history", "Server rewind", "Slab-tested rays"],
   },
   {
     id: "anticheat",
     clip: "nCBAN5JKXYLo4iTgO",
     title: "Anti Cheat System",
     cat: "Netcode",
-    tags: ["Server-side detectors", "Movement exemptions", "Rubber-banding", "Rate limits"],
   },
   {
     id: "playback",
     clip: "nCByfgLtf4Pj3pDYO",
     title: "Playback System",
     cat: "Netcode",
-    tags: ["Ring buffers", "20-byte pose records", "Kill-cam"],
   },
   {
     id: "matchmaking",
     clip: "nCBdKKdhlCOURQLsk",
     title: "Queue and Matchmaking",
     cat: "Netcode",
-    tags: ["Queue", "Per-match arenas", "Best of three"],
   },
   {
     id: "squad",
     clip: "nCBxCFjMLlNlA3Xaq",
     title: "Smart AI System",
     cat: "AI",
-    tags: ["GOAP", "A* over bitmasks", "Squad blackboard"],
   },
   {
     id: "detection",
     clip: "nCBtonXBc84lBEYZz",
     title: "Detection System",
     cat: "AI",
-    tags: ["Sight cones", "Suspicion meter", "Sound propagation", "Guard states"],
   },
   {
     id: "crowd",
     clip: "nCBwMr7KYRowBAhIh",
     title: "Crowd System",
     cat: "AI",
-    tags: ["Flow fields", "Spatial hash", "Packed buffer"],
   },
   {
     id: "voxels",
     clip: "nCBDFlPrrbd96UP6W",
     title: "Voxel Destruction",
     cat: "Physics",
-    tags: ["Voxel grid in a buffer", "Greedy meshing", "Chunked updates"],
   },
   {
     id: "fishing",
     clip: "nCBoNoH179vYnnzmj",
     title: "Fishing System",
     cat: "Gameplay",
-    tags: ["Verlet rope", "Tension model", "Species tables"],
   },
   {
     id: "garage",
     clip: "nCBnvV0tDVoAYqI4i",
     title: "Kart Garage",
     cat: "Gameplay",
-    tags: ["Part-based builder", "Server-checked purchases", "Saved loadouts"],
   },
   {
     id: "clanreroll",
     clip: "soulbound-clan-reroll",
     title: "Clan Reroll",
     cat: "Gameplay",
-    tags: ["Inventory", "Consumables", "Clan rolls"],
   },
   {
     id: "skilltree",
     clip: "nCjqwaNsHhoFaa_sD",
     title: "Skill Tree System",
     cat: "Interface",
-    tags: ["Pan and zoom graph", "Stat modifiers", "Server-validated purchases"],
   },
   {
     id: "stars",
     clip: "nCB7ShgidA52yhQ8y",
     title: "Stars Menu",
     cat: "Interface",
-    tags: ["Generated starfield", "ReplicatedFirst", "Loading flow"],
   },
   {
     id: "menus",
     clip: "soulbound-menus",
     title: "Soul Bound Menus",
     cat: "Interface",
-    tags: ["Pause menu", "Animated title", "Save slots"],
   },
   {
     id: "rogue-light-carried-slow",
@@ -155,7 +135,6 @@ const SYSTEMS = [
     title: "A Light Carried Slow",
     cat: "Rogue",
     sub: "Quests",
-    tags: ["Carried flame", "Sprint and wade checks", "Fail returns to the gate"],
   },
   {
     id: "rogue-glade-of-gloom",
@@ -163,7 +142,6 @@ const SYSTEMS = [
     title: "Glade of Gloom",
     cat: "Rogue",
     sub: "Quests",
-    tags: ["Slime bounty", "Zone kill counts", "Bounty board"],
   },
   {
     id: "rogue-moths-for-the-lantern",
@@ -171,7 +149,6 @@ const SYSTEMS = [
     title: "Moths for the Lantern",
     cat: "Rogue",
     sub: "Quests",
-    tags: ["Moving targets", "Server position checks", "Dialogue choices"],
   },
   {
     id: "rogue-widows-ring",
@@ -179,7 +156,6 @@ const SYSTEMS = [
     title: "The Widow's Ring",
     cat: "Rogue",
     sub: "Quests",
-    tags: ["Clue search", "Randomised hiding spot", "Cloth reward"],
   },
   {
     id: "rogue-far-from-the-road",
@@ -187,7 +163,6 @@ const SYSTEMS = [
     title: "Far From the Road",
     cat: "Rogue",
     sub: "Quests",
-    tags: ["Escort follower", "Waits and calls out", "Unstuck catch-up"],
   },
 ];
 
@@ -353,7 +328,6 @@ function setupBrowser() {
 
     $("#meta-cat").textContent = system.sub ? `${system.cat} · ${system.sub}` : system.cat;
     $("#meta-title").textContent = system.title;
-    $("#meta-tags").innerHTML = system.tags.map((tag) => `<li>${tag}</li>`).join("");
 
     const meta = $("#meta");
     meta.classList.remove("is-in");
