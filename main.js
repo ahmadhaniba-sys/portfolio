@@ -5,7 +5,7 @@ const CONFIG = {
   discordId: "1273766618941358112",
 };
 
-const CATEGORIES = ["Combat", "Sports", "Netcode", "AI", "Physics", "Gameplay", "Interface"];
+const CATEGORIES = ["Combat", "Sports", "Netcode", "AI", "Physics", "Gameplay", "Interface", "Rogue"];
 
 // clip: the file name in the clips folder, without .mp4.
 const SYSTEMS = [
@@ -149,6 +149,46 @@ const SYSTEMS = [
     cat: "Interface",
     tags: ["Pause menu", "Animated title", "Save slots"],
   },
+  {
+    id: "rogue-light-carried-slow",
+    clip: "rogue-light-carried-slow",
+    title: "A Light Carried Slow",
+    cat: "Rogue",
+    sub: "Quests",
+    tags: ["Carried flame", "Sprint and wade checks", "Fail returns to the gate"],
+  },
+  {
+    id: "rogue-glade-of-gloom",
+    clip: "rogue-glade-of-gloom",
+    title: "Glade of Gloom",
+    cat: "Rogue",
+    sub: "Quests",
+    tags: ["Slime bounty", "Zone kill counts", "Bounty board"],
+  },
+  {
+    id: "rogue-moths-for-the-lantern",
+    clip: "rogue-moths-for-the-lantern",
+    title: "Moths for the Lantern",
+    cat: "Rogue",
+    sub: "Quests",
+    tags: ["Moving targets", "Server position checks", "Dialogue choices"],
+  },
+  {
+    id: "rogue-widows-ring",
+    clip: "rogue-widows-ring",
+    title: "The Widow's Ring",
+    cat: "Rogue",
+    sub: "Quests",
+    tags: ["Clue search", "Randomised hiding spot", "Cloth reward"],
+  },
+  {
+    id: "rogue-far-from-the-road",
+    clip: "rogue-far-from-the-road",
+    title: "Far From the Road",
+    cat: "Rogue",
+    sub: "Quests",
+    tags: ["Escort follower", "Waits and calls out", "Unstuck catch-up"],
+  },
 ];
 
 const GAMES = [
@@ -225,7 +265,16 @@ function setupBrowser() {
     group.className = "index-group";
     group.innerHTML = `<div class="index-label"><span>${cat}</span><span>${members.length}</span></div>`;
 
+    let sub = null;
     for (const system of members) {
+      if (system.sub && system.sub !== sub) {
+        sub = system.sub;
+        const count = members.filter((s) => s.sub === sub).length;
+        const label = document.createElement("div");
+        label.className = "index-sub";
+        label.innerHTML = `<span>${sub}</span><span>${count}</span>`;
+        group.append(label);
+      }
       const item = document.createElement("button");
       item.type = "button";
       item.className = "index-item";
@@ -302,7 +351,7 @@ function setupBrowser() {
       else item.removeAttribute("aria-current");
     }
 
-    $("#meta-cat").textContent = system.cat;
+    $("#meta-cat").textContent = system.sub ? `${system.cat} · ${system.sub}` : system.cat;
     $("#meta-title").textContent = system.title;
     $("#meta-tags").innerHTML = system.tags.map((tag) => `<li>${tag}</li>`).join("");
 
